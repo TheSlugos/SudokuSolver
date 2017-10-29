@@ -28,12 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.btnRows = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // btnRows
+            // 
+            this.btnRows.Location = new System.Drawing.Point(708, 310);
+            this.btnRows.Name = "btnRows";
+            this.btnRows.Size = new System.Drawing.Size(132, 40);
+            this.btnRows.TabIndex = 0;
+            this.btnRows.Text = "Check Rows";
+            this.btnRows.UseVisualStyleBackColor = true;
+            this.btnRows.Click += new System.EventHandler(this.btnRows_Click);
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(852, 557);
+            this.Controls.Add(this.btnRows);
+            this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.Button btnRows;
     }
 }
 
