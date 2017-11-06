@@ -100,51 +100,18 @@ namespace QueueTest
 
             Console.WriteLine("Find Missing characters test");
 
-            int[] row = { 9, 4, 3, 0, 2, 5, 6, 7, 8 };
+			int[] missing = candidate.GetMissingNumbers();
 
-            int[] testValues = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+			Console.Write( "Missing numbers:" );
 
-            for(int i=0; i < row.Length; i++)
-            {
-                if (row[i] == 0)
-                    continue;
+			foreach(int i in missing)
+			{
+				Console.Write( i.ToString() );
+			}
+			Console.WriteLine();
 
-                // have a number that is not 0
-                int[] temp = new int[testValues.Length - 1];
-                int copied = 0;
-                for(int j = 0; j < testValues.Length; j++)
-                {
-                    if ( testValues[j] != row[i])
-                    {
-                        temp[j - copied] = testValues[j];
-                    }
-                    else
-                    {
-                        copied++;
-                    }
-                }
+			IList<int[]> myList = CombinationFinder.FindCombinations(missing);
 
-                testValues = temp;
-            }
-
-            if ( testValues.Length > 0 )
-            {
-                Console.Write("Missing values are: ");
-
-                for ( int i =0;i<testValues.Length;i++)
-                {
-                    Console.Write(testValues[i]);
-
-                    if (i != testValues.Length - 1)
-                        Console.Write(" ");
-                    else
-                        Console.WriteLine();
-                }
-            }
-            else
-            {
-                Console.WriteLine("Row is complete");
-            }
 
         } // end Main
     }

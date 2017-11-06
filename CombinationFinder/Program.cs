@@ -40,9 +40,9 @@ namespace CombinationFinder
             {
                 for (int i = 0; i < size - 1; i++)
                 {
-                    FindCombinations(myArray,size-1);
+					FindCombinations(myArray,size-1);
 
-                    if ( size % 2 == 0 )
+					if ( size % 2 == 0 )
                     {
                         //int tmp = myArray[i];
                         //myArray[i] = myArray[size - 1];
@@ -57,8 +57,9 @@ namespace CombinationFinder
                         Swap(ref myArray[0], ref myArray[size - 1]);
                     }
                 }
-                FindCombinations(myArray, size - 1);
-            }
+
+				FindCombinations(myArray, size - 1);
+			}
         }
     }
 }
