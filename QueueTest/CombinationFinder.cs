@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,7 +36,10 @@ namespace QueueTest
 		{
 			if ( size == 1 )
 			{
-				_myList.Add( numbers );
+				// copy the array and add the copy
+				int[] temp = (int[])numbers.Clone();
+
+				_myList.Add( temp );
 			}
 			else
 			{
@@ -57,7 +61,7 @@ namespace QueueTest
 			}
 		}
 
-		public static IList<int[]> FindCombinations(int[] numbers)
+		public static ReadOnlyCollection<int[]> FindCombinations(int[] numbers)
 		{
 			// create new list for this lot of combinations
 			_myList = new List<int[]>();

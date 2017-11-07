@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -62,57 +64,153 @@ namespace QueueTest
                 }
             }
 
-            board[0, 0] = 1;
-            board[1, 0] = 2;
-            board[2, 0] = 3;
+			// row 0
+			board[ 1, 0 ] = 3;
+			board[ 3, 0 ] = 6;
+			board[ 5, 0 ] = 5;
+			// row 1
+			board[ 0, 1 ] = 8;
+			board[ 7, 1 ] = 3;
+			// row 2
+			board[ 2, 2 ] = 4;
+			board[ 4, 2 ] = 1;
+			board[ 7, 2 ] = 5;
+			board[ 8, 2 ] = 9;
+			//row 3
+			board[ 3, 3 ] = 7;
+			board[ 5, 3 ] = 1;
+			board[ 8, 3 ] = 6;
+			// row 4
+			board[ 1, 4 ] = 6;
+			board[ 7, 4 ] = 1;
+			// row 5
+			board[ 0, 5 ] = 5;
+			board[ 3, 5 ] = 3;
+			board[ 5, 5 ] = 2;
+			// row 6
+			board[ 0, 6 ] = 9;
+			board[ 1, 6 ] = 5;
+			board[ 4, 6 ] = 2;
+			board[ 6, 6 ] = 3;
+			// row 7
+			board[ 1, 7 ] = 7;
+			board[ 8, 7 ] = 8;
+			// row 8
+			board[ 3, 8 ] = 1;
+			board[ 5, 8 ] = 7;
+			board[ 7, 8 ] = 9;
 
-            Candidate candidate = new Candidate(board);
-            Console.WriteLine(candidate);
+			board[ 7, 0 ] = 4;
 
-            Console.WriteLine("Adding another value to board");
+			Candidate candidate = new Candidate(board);
+			Candidate solution = default( Candidate );
+			int count = 0;
+			int valid = 0;
 
-            board[3, 0] = 4;
+			Console.Write(candidate);
+			Console.WriteLine( candidate.Validate().ToString() );
+			Console.ReadKey( true );
 
-            Console.WriteLine(candidate);
+			Queue<Candidate> candidateQueue = new Queue<Candidate>();
+			candidateQueue.Enqueue( candidate );
 
-            // make a copy of this candidate
-            Candidate newCandidate = new Candidate(candidate);
+			Stopwatch sw = new Stopwatch();
+			sw.Start();
 
-            Console.WriteLine("Add another value to candidate using Property");
-
-            candidate.Board[3, 0] = 5;
-
-            Console.WriteLine(candidate);
-
-            Console.WriteLine("Copy of candidate before adding the 5");
-
-            Console.WriteLine(newCandidate);
-
-            Console.WriteLine("Changing new candidate");
-
-            newCandidate.Board[3, 0] = 4;
-
-            Console.WriteLine(newCandidate);
-
-            Console.WriteLine("original candidate");
-
-            Console.WriteLine(candidate);
-
-            Console.WriteLine("Find Missing characters test");
-
-			int[] missing = candidate.GetMissingNumbers();
-
-			Console.Write( "Missing numbers:" );
-
-			foreach(int i in missing)
+			// SOLUTION LOOP
+			while( !candidateQueue.Empty() )
 			{
-				Console.Write( i.ToString() );
+				// get latest possible solution off the queue
+				Candidate baseSolution = candidateQueue.Dequeue();
+
+				// crude drop out
+				if( baseSolution.CurrentRow == Settings.BOARD_SIZE )
+				{
+					solution = baseSolution;
+					break;
+				}
+
+				//Console.WriteLine( baseSolution );
+				// get missing numbers from the current row of base
+				int[] missing = baseSolution.GetMissingNumbers();
+
+				//Console.Write( "Missing numbers:" );
+
+				//foreach( int i in missing )
+				//{
+				//	Console.Write( i.ToString() );
+				//}
+				//Console.WriteLine();
+
+				if( missing.Length > 0 )
+				{
+					// get list of all possible combinations of missing values for this row
+					ReadOnlyCollection<int[]> list = CombinationFinder.FindCombinations( missing );
+					//Console.WriteLine( "Total combinations of missing numbers: {0}", list.Count.ToString() );
+
+					// create a new candidate for each combination of missing values
+					// fill the current row
+					// if solution is valid add to the queue
+					foreach( int[] values in list )
+					{
+						count++;
+
+						// create a new possible solution from the base
+						Candidate current = new Candidate( baseSolution );
+
+						current.FillRow( values );
+
+						//Console.WriteLine( "Solution {0}", count );
+						//Console.WriteLine( current );
+
+						if( current.Validate() )
+						{
+							candidateQueue.Enqueue( current );
+							valid++;
+						}
+						//Console.WriteLine( current );
+					}
+
+					//Console.WriteLine( "Total valid solutions: {0}", candidateQueue.Count );
+
+					//foreach( int[] i in combinationfinder.findcombinations( missing ) )
+					//{
+					//	foreach( int x in i )
+					//	{
+					//		console.write( x );
+					//	}
+					//	console.writeline();
+					//}
+
+					//Console.Write( "First combination: " );
+					//foreach(int i in list[0])
+					//{
+					//	Console.Write( "{0} ", i );
+					//}
+					//Console.WriteLine();
+
+					//current.FillRow( list[ 0 ] );
+
+					//Console.WriteLine( current );
+					//Console.WriteLine( "Current row for current is {0}", current.CurrentRow );
+					//Console.WriteLine( "Current solution is valid: {0}", current.Validate() );
+				}
 			}
-			Console.WriteLine();
+			sw.Stop();
+			switch( solution )
+			{
+				case default( Candidate ):
+					Console.WriteLine( "No solution found" );
+					break;
+				default:
+					Console.WriteLine( "SOLUTION IS:" );
+				Console.WriteLine( solution );
+					break;
+			}
 
-			IList<int[]> myList = CombinationFinder.FindCombinations(missing);
-
-
-        } // end Main
+			Console.WriteLine( "Puzzle solved in {0} ms", sw.ElapsedMilliseconds);
+			Console.WriteLine( "Solutions attempted: {0}", count );
+			Console.WriteLine( "Valid solutions pushed to queue: {0}", valid );
+		} // end Main
     }
 }

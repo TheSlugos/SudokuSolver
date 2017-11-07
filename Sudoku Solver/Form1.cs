@@ -182,7 +182,7 @@ namespace Sudoku_Solver
                 _labels[i, rows].BackColor = SystemColors.Control;
             }
 
-            for (int i = 0; i < 9; i++)
+            for (int i = 0; i < 8; i++)
             {
                 // check if this cell is already invalid
                 if (_labels[i,rows].BackColor != Color.Red)

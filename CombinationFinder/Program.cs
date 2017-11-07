@@ -7,7 +7,7 @@ namespace CombinationFinder
 {
     class Program
     {
-        static int[] originalArray = { 1, 2, 3, 4 };
+		static int[] originalArray = { 4, 8, 9 };
 
         public static void PrintArray(int[] myArray)
         {
@@ -40,7 +40,7 @@ namespace CombinationFinder
             {
                 for (int i = 0; i < size - 1; i++)
                 {
-					FindCombinations(myArray,size-1);
+					FindCombinations( myArray, size - 1 );
 
 					if ( size % 2 == 0 )
                     {
