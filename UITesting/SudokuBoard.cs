@@ -1,5 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Collections.ObjectModel;
+using System.Windows.Forms;
+using UITesting;
 
 namespace SudokuSolver
 {
@@ -61,9 +63,11 @@ namespace SudokuSolver
 			_Solution = default( Candidate );
 		}
 
-		public bool Solve()
+		public bool Solve(Form1 theForm)
 		{
 			bool result = false;
+			int currentRow;
+			long lastTime = 0;
 
 			// create a candidate
 			// create the queue to hold the solution candidates and add the board to it
@@ -77,7 +81,25 @@ namespace SudokuSolver
 			{
 				// get latest possible solution off the queue
 				Candidate baseSolution = candidateQueue.Dequeue();
-
+				//if( baseSolution.CurrentRow != currentRow )
+				//{
+				//	if( theForm.InvokeRequired )
+				//	{
+				//		currentRow = baseSolution.CurrentRow;
+				//		theForm.Invoke( theForm.rowLabelDelegate, new object[] { currentRow, Valid, Attempts, _sw.ElapsedMilliseconds } );
+				//	}
+				//}
+				long thisTime = _sw.ElapsedMilliseconds;
+				if( thisTime - lastTime > 1000 )
+				{
+					lastTime = thisTime;
+					
+					if( theForm.InvokeRequired )
+					{
+						currentRow = baseSolution.CurrentRow;
+						theForm.Invoke( theForm.rowLabelDelegate, new object[] { currentRow, Valid, Attempts, lastTime } );
+					}
+				}
 				// crude drop out
 				if( baseSolution.CurrentRow == Settings.BOARD_SIZE )
 				{

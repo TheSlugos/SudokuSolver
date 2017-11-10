@@ -8,6 +8,9 @@ namespace UITesting
 {
 	public partial class Form1 : Form
 	{
+		public delegate void ChangeRowLabelText(int value, int valid, int attempt, long time);
+		public ChangeRowLabelText rowLabelDelegate;
+
 		Label selectedLabel;
 
 		public Form1()
@@ -41,6 +44,16 @@ namespace UITesting
 		private void Form1_Load( object sender, EventArgs e )
 		{
 			selectedLabel = default( Label );
+			rowLabelDelegate = new ChangeRowLabelText(ChangeRowText);
+			
+		}
+
+		private void ChangeRowText( int value, int valid, int attempt, long time )
+		{
+			labelRow.Text = value.ToString();
+			labelAttempts.Text = attempt.ToString();
+			labelValid.Text = valid.ToString();
+			labelTime.Text = time.ToString();
 		}
 
 		private void CellSelected( object sender, EventArgs e )
@@ -97,7 +110,7 @@ namespace UITesting
 			ResetLabelColor();
 		}
 
-		async private void button11_Click( object sender, EventArgs e )
+		private async void button11_Click( object sender, EventArgs e )
 		{
 			bool labelValue = false;
 			// go through all labels and if there are no label values
@@ -148,11 +161,12 @@ namespace UITesting
 
 				// set buttons to disabled
 				button11.Enabled = false;
-
-				bool result = await Task.Run( () => sb.Solve());
+				this.Cursor = Cursors.WaitCursor;
+				bool result = await Task.Run( () => sb.Solve( this ) );
 
 				button11.Enabled = true;
-
+				this.Cursor = Cursors.Default;
+				
 				if( result )
 				{
 					foreach( Control c in Controls )

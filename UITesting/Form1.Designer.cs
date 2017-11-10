@@ -127,6 +127,8 @@
 			this.labelTime = new System.Windows.Forms.Label();
 			this.labelAttempts = new System.Windows.Forms.Label();
 			this.labelValid = new System.Windows.Forms.Label();
+			this.label85 = new System.Windows.Forms.Label();
+			this.labelRow = new System.Windows.Forms.Label();
 			this.SuspendLayout();
 			// 
 			// button1
@@ -250,6 +252,7 @@
 			this.label2.Size = new System.Drawing.Size(25, 22);
 			this.label2.TabIndex = 11;
 			this.label2.Tag = "10";
+			this.label2.Text = "5";
 			this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.label2.Click += new System.EventHandler(this.CellSelected);
 			// 
@@ -262,6 +265,7 @@
 			this.label3.Size = new System.Drawing.Size(25, 22);
 			this.label3.TabIndex = 12;
 			this.label3.Tag = "20";
+			this.label3.Text = "1";
 			this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.label3.Click += new System.EventHandler(this.CellSelected);
 			// 
@@ -298,6 +302,7 @@
 			this.label6.Size = new System.Drawing.Size(25, 22);
 			this.label6.TabIndex = 15;
 			this.label6.Tag = "21";
+			this.label6.Text = "2";
 			this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.label6.Click += new System.EventHandler(this.CellSelected);
 			// 
@@ -310,6 +315,7 @@
 			this.label7.Size = new System.Drawing.Size(25, 22);
 			this.label7.TabIndex = 16;
 			this.label7.Tag = "02";
+			this.label7.Text = "6";
 			this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.label7.Click += new System.EventHandler(this.CellSelected);
 			// 
@@ -322,6 +328,7 @@
 			this.label8.Size = new System.Drawing.Size(25, 22);
 			this.label8.TabIndex = 17;
 			this.label8.Tag = "12";
+			this.label8.Text = "8";
 			this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.label8.Click += new System.EventHandler(this.CellSelected);
 			// 
@@ -346,6 +353,7 @@
 			this.label10.Size = new System.Drawing.Size(25, 22);
 			this.label10.TabIndex = 27;
 			this.label10.Tag = "52";
+			this.label10.Text = "5";
 			this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.label10.Click += new System.EventHandler(this.CellSelected);
 			// 
@@ -358,6 +366,7 @@
 			this.label11.Size = new System.Drawing.Size(25, 22);
 			this.label11.TabIndex = 26;
 			this.label11.Tag = "42";
+			this.label11.Text = "7";
 			this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.label11.Click += new System.EventHandler(this.CellSelected);
 			// 
@@ -406,6 +415,7 @@
 			this.label15.Size = new System.Drawing.Size(25, 22);
 			this.label15.TabIndex = 22;
 			this.label15.Tag = "31";
+			this.label15.Text = "1";
 			this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.label15.Click += new System.EventHandler(this.CellSelected);
 			// 
@@ -418,6 +428,7 @@
 			this.label16.Size = new System.Drawing.Size(25, 22);
 			this.label16.TabIndex = 21;
 			this.label16.Tag = "50";
+			this.label16.Text = "8";
 			this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.label16.Click += new System.EventHandler(this.CellSelected);
 			// 
@@ -466,6 +477,7 @@
 			this.label20.Size = new System.Drawing.Size(25, 22);
 			this.label20.TabIndex = 35;
 			this.label20.Tag = "72";
+			this.label20.Text = "4";
 			this.label20.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.label20.Click += new System.EventHandler(this.CellSelected);
 			// 
@@ -478,6 +490,7 @@
 			this.label21.Size = new System.Drawing.Size(25, 22);
 			this.label21.TabIndex = 34;
 			this.label21.Tag = "62";
+			this.label21.Text = "2";
 			this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.label21.Click += new System.EventHandler(this.CellSelected);
 			// 
@@ -490,6 +503,7 @@
 			this.label22.Size = new System.Drawing.Size(25, 22);
 			this.label22.TabIndex = 33;
 			this.label22.Tag = "81";
+			this.label22.Text = "8";
 			this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.label22.Click += new System.EventHandler(this.CellSelected);
 			// 
@@ -538,6 +552,7 @@
 			this.label26.Size = new System.Drawing.Size(25, 22);
 			this.label26.TabIndex = 29;
 			this.label26.Tag = "70";
+			this.label26.Text = "7";
 			this.label26.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.label26.Click += new System.EventHandler(this.CellSelected);
 			// 
@@ -550,6 +565,7 @@
 			this.label27.Size = new System.Drawing.Size(25, 22);
 			this.label27.TabIndex = 28;
 			this.label27.Tag = "60";
+			this.label27.Text = "9";
 			this.label27.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.label27.Click += new System.EventHandler(this.CellSelected);
 			// 
@@ -598,6 +614,7 @@
 			this.label31.Size = new System.Drawing.Size(25, 22);
 			this.label31.TabIndex = 42;
 			this.label31.Tag = "24";
+			this.label31.Text = "4";
 			this.label31.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.label31.Click += new System.EventHandler(this.CellSelected);
 			// 
@@ -610,6 +627,7 @@
 			this.label32.Size = new System.Drawing.Size(25, 22);
 			this.label32.TabIndex = 41;
 			this.label32.Tag = "14";
+			this.label32.Text = "3";
 			this.label32.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.label32.Click += new System.EventHandler(this.CellSelected);
 			// 
@@ -670,6 +688,7 @@
 			this.label37.Size = new System.Drawing.Size(25, 22);
 			this.label37.TabIndex = 54;
 			this.label37.Tag = "55";
+			this.label37.Text = "3";
 			this.label37.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.label37.Click += new System.EventHandler(this.CellSelected);
 			// 
@@ -766,6 +785,7 @@
 			this.label45.Size = new System.Drawing.Size(25, 22);
 			this.label45.TabIndex = 46;
 			this.label45.Tag = "33";
+			this.label45.Text = "5";
 			this.label45.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.label45.Click += new System.EventHandler(this.CellSelected);
 			// 
@@ -826,6 +846,7 @@
 			this.label50.Size = new System.Drawing.Size(25, 22);
 			this.label50.TabIndex = 59;
 			this.label50.Tag = "74";
+			this.label50.Text = "8";
 			this.label50.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.label50.Click += new System.EventHandler(this.CellSelected);
 			// 
@@ -838,6 +859,7 @@
 			this.label51.Size = new System.Drawing.Size(25, 22);
 			this.label51.TabIndex = 58;
 			this.label51.Tag = "64";
+			this.label51.Text = "5";
 			this.label51.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.label51.Click += new System.EventHandler(this.CellSelected);
 			// 
@@ -910,6 +932,7 @@
 			this.label57.Size = new System.Drawing.Size(25, 22);
 			this.label57.TabIndex = 70;
 			this.label57.Tag = "38";
+			this.label57.Text = "4";
 			this.label57.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.label57.Click += new System.EventHandler(this.CellSelected);
 			// 
@@ -922,6 +945,7 @@
 			this.label58.Size = new System.Drawing.Size(25, 22);
 			this.label58.TabIndex = 69;
 			this.label58.Tag = "57";
+			this.label58.Text = "2";
 			this.label58.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.label58.Click += new System.EventHandler(this.CellSelected);
 			// 
@@ -970,6 +994,7 @@
 			this.label62.Size = new System.Drawing.Size(25, 22);
 			this.label62.TabIndex = 65;
 			this.label62.Tag = "46";
+			this.label62.Text = "3";
 			this.label62.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.label62.Click += new System.EventHandler(this.CellSelected);
 			// 
@@ -982,6 +1007,7 @@
 			this.label63.Size = new System.Drawing.Size(25, 22);
 			this.label63.TabIndex = 64;
 			this.label63.Tag = "36";
+			this.label63.Text = "8";
 			this.label63.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.label63.Click += new System.EventHandler(this.CellSelected);
 			// 
@@ -994,6 +1020,7 @@
 			this.label64.Size = new System.Drawing.Size(25, 22);
 			this.label64.TabIndex = 81;
 			this.label64.Tag = "28";
+			this.label64.Text = "3";
 			this.label64.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.label64.Click += new System.EventHandler(this.CellSelected);
 			// 
@@ -1006,6 +1033,7 @@
 			this.label65.Size = new System.Drawing.Size(25, 22);
 			this.label65.TabIndex = 80;
 			this.label65.Tag = "18";
+			this.label65.Text = "2";
 			this.label65.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.label65.Click += new System.EventHandler(this.CellSelected);
 			// 
@@ -1054,6 +1082,7 @@
 			this.label69.Size = new System.Drawing.Size(25, 22);
 			this.label69.TabIndex = 76;
 			this.label69.Tag = "07";
+			this.label69.Text = "1";
 			this.label69.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.label69.Click += new System.EventHandler(this.CellSelected);
 			// 
@@ -1066,6 +1095,7 @@
 			this.label70.Size = new System.Drawing.Size(25, 22);
 			this.label70.TabIndex = 75;
 			this.label70.Tag = "26";
+			this.label70.Text = "5";
 			this.label70.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.label70.Click += new System.EventHandler(this.CellSelected);
 			// 
@@ -1078,6 +1108,7 @@
 			this.label71.Size = new System.Drawing.Size(25, 22);
 			this.label71.TabIndex = 74;
 			this.label71.Tag = "16";
+			this.label71.Text = "4";
 			this.label71.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.label71.Click += new System.EventHandler(this.CellSelected);
 			// 
@@ -1114,6 +1145,7 @@
 			this.label74.Size = new System.Drawing.Size(25, 22);
 			this.label74.TabIndex = 89;
 			this.label74.Tag = "78";
+			this.label74.Text = "1";
 			this.label74.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.label74.Click += new System.EventHandler(this.CellSelected);
 			// 
@@ -1126,6 +1158,7 @@
 			this.label75.Size = new System.Drawing.Size(25, 22);
 			this.label75.TabIndex = 88;
 			this.label75.Tag = "68";
+			this.label75.Text = "8";
 			this.label75.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.label75.Click += new System.EventHandler(this.CellSelected);
 			// 
@@ -1162,6 +1195,7 @@
 			this.label78.Size = new System.Drawing.Size(25, 22);
 			this.label78.TabIndex = 85;
 			this.label78.Tag = "67";
+			this.label78.Text = "7";
 			this.label78.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.label78.Click += new System.EventHandler(this.CellSelected);
 			// 
@@ -1174,6 +1208,7 @@
 			this.label79.Size = new System.Drawing.Size(25, 22);
 			this.label79.TabIndex = 84;
 			this.label79.Tag = "86";
+			this.label79.Text = "2";
 			this.label79.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.label79.Click += new System.EventHandler(this.CellSelected);
 			// 
@@ -1186,6 +1221,7 @@
 			this.label80.Size = new System.Drawing.Size(25, 22);
 			this.label80.TabIndex = 83;
 			this.label80.Tag = "76";
+			this.label80.Text = "9";
 			this.label80.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.label80.Click += new System.EventHandler(this.CellSelected);
 			// 
@@ -1272,11 +1308,30 @@
 			this.labelValid.Size = new System.Drawing.Size(0, 13);
 			this.labelValid.TabIndex = 98;
 			// 
+			// label85
+			// 
+			this.label85.AutoSize = true;
+			this.label85.Location = new System.Drawing.Point(191, 230);
+			this.label85.Name = "label85";
+			this.label85.Size = new System.Drawing.Size(32, 13);
+			this.label85.TabIndex = 99;
+			this.label85.Text = "Row:";
+			// 
+			// labelRow
+			// 
+			this.labelRow.AutoSize = true;
+			this.labelRow.Location = new System.Drawing.Point(221, 230);
+			this.labelRow.Name = "labelRow";
+			this.labelRow.Size = new System.Drawing.Size(0, 13);
+			this.labelRow.TabIndex = 100;
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(334, 270);
+			this.Controls.Add(this.labelRow);
+			this.Controls.Add(this.label85);
 			this.Controls.Add(this.labelValid);
 			this.Controls.Add(this.labelAttempts);
 			this.Controls.Add(this.labelTime);
@@ -1490,6 +1545,8 @@
 		private System.Windows.Forms.Label labelTime;
 		private System.Windows.Forms.Label labelAttempts;
 		private System.Windows.Forms.Label labelValid;
+		private System.Windows.Forms.Label label85;
+		private System.Windows.Forms.Label labelRow;
 	}
 }
 
