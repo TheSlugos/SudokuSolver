@@ -1,8 +1,7 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Collections.ObjectModel;
 
-namespace QueueTest
+namespace SudokuSolver
 {
 	class SudokuBoard
 	{
@@ -80,7 +79,7 @@ namespace QueueTest
 				Candidate baseSolution = candidateQueue.Dequeue();
 
 				// crude drop out
-				if( baseSolution.CurrentRow >= Settings.BOARD_SIZE )
+				if( baseSolution.CurrentRow == Settings.BOARD_SIZE )
 				{
 					_Solution = baseSolution;
 					result = true;
@@ -115,7 +114,6 @@ namespace QueueTest
 						{
 							candidateQueue.Enqueue( current );
 							_ValidSolutionsOnQueue++;
-							Console.WriteLine( current.CurrentRow );
 						}
 						//Console.WriteLine( current );
 					}
