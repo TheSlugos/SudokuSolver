@@ -157,7 +157,7 @@ namespace UITesting
 				}
 
 				SudokuBoard sb = new SudokuBoard( board );
-				MessageBox.Show( sb.Board.ToString() );
+				//MessageBox.Show( sb.Board.ToString() );
 
 				// set buttons to disabled
 				button11.Enabled = false;
@@ -186,7 +186,7 @@ namespace UITesting
 						}
 					}
 
-					MessageBox.Show( sb.Solution.ToString() );
+					//MessageBox.Show( sb.Solution.ToString() );
 				}
 				else
 					MessageBox.Show( "No Solution Found" );

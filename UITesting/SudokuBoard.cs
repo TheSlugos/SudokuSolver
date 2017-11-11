@@ -90,7 +90,7 @@ namespace SudokuSolver
 				//	}
 				//}
 				long thisTime = _sw.ElapsedMilliseconds;
-				if( thisTime - lastTime > 1000 )
+				if( thisTime - lastTime > 100 )
 				{
 					lastTime = thisTime;
 					

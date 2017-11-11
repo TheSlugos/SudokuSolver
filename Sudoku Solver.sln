@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QueueTest", "QueueTest\Queu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UITesting", "UITesting\UITesting.csproj", "{D9B4B580-0BE2-4A4F-B116-925B96EAFE53}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpecficComboFinder", "SpecficComboFinder\SpecficComboFinder.csproj", "{FE8DC5E3-D002-47C3-8443-02E00CCEB15D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{D9B4B580-0BE2-4A4F-B116-925B96EAFE53}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D9B4B580-0BE2-4A4F-B116-925B96EAFE53}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D9B4B580-0BE2-4A4F-B116-925B96EAFE53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE8DC5E3-D002-47C3-8443-02E00CCEB15D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE8DC5E3-D002-47C3-8443-02E00CCEB15D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE8DC5E3-D002-47C3-8443-02E00CCEB15D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE8DC5E3-D002-47C3-8443-02E00CCEB15D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
