@@ -6,11 +6,5 @@ using System.Threading.Tasks;
 
 namespace SpecficComboFinder
 {
-	class SpecificComboFinder
-	{
-		public void test()
-		{
-
-		}
-	}
+	
 }
