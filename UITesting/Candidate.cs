@@ -35,6 +35,9 @@ namespace SudokuSolver
             for (int y = 0; y < Settings.BOARD_SIZE; y++)
                 for (int x = 0; x < Settings.BOARD_SIZE; x++)
                     _Board[x, y] = board[x, y];
+
+			// pre process
+			FindPossibleValues();
         }
 
         // copy constructor
@@ -225,5 +228,96 @@ namespace SudokuSolver
 			// this row is full move to next row
 			_CurrentRow++;
 		}
-    } // end class Candidate
+
+		/// <summary>
+		/// Go through board and determine possible values for each cell
+		/// </summary>
+		private void FindPossibleValues()
+		{
+			// Queue to store single possible values
+			Queue < int[] > singleValues = new Queue<int[]>();
+
+			// store possible values
+			List<int>[,] possibleValues = new List<int>[ Settings.BOARD_SIZE, Settings.BOARD_SIZE ];
+			for( int row = 0; row < Settings.BOARD_SIZE; row++ )
+			{
+				for( int col = 0; col < Settings.BOARD_SIZE; col++ )
+				{
+					if( _Board[ col, row ] == 0 )
+					{
+						// empty cell
+
+						// fill a list with all numbers
+						possibleValues[ col, row ] = new List<int>();
+						for( int n = 0; n < Settings.BOARD_SIZE; n++ )
+						{
+							possibleValues[ col, row ].Add( n + 1 );
+						}
+
+						// go through this row and remove all found values
+						for( int columns = 0; columns < Settings.BOARD_SIZE; columns++ )
+						{
+							// skip empty cells
+							if( _Board[ columns, row ] == 0 )
+								continue;
+
+							// remove found values from list of possible values
+							possibleValues[ col, row ].Remove( _Board[ columns, row ] );
+						}
+
+						// go through this column and remove all found values
+						for ( int rows = 0; rows < Settings.BOARD_SIZE; rows++)
+						{
+							// skip empty cells
+							if( _Board[ col, rows ] == 0 )
+								continue;
+
+							// remove found values from list of possible values
+							possibleValues[ col, row ].Remove( _Board[ col, rows ] );
+						}
+
+						// go through this square
+						int squareX = col / 3;
+						int squareY = row / 3;
+
+						for ( int y = 0; y < 3; y++)
+						{
+							for ( int x = 0; x < 3; x++)
+							{
+								// skip empty cells
+								if( _Board[ x + squareX * 3, y + squareY * 3 ] == 0 )
+									continue;
+
+								// remove found value from possible values
+								possibleValues[ col, row ].Remove( _Board[ x + squareX * 3, y + squareY * 3 ] );
+							}
+						}
+
+						// check if possible values is only 1
+						if( possibleValues[ col, row ].Count == 1 )
+						{
+							int[] tmp = new int[ 3 ];
+							tmp[ 0 ] = col;
+							tmp[ 1 ] = row;
+							tmp[ 2 ] = possibleValues[ col, row ][ 0 ];
+
+							singleValues.Enqueue( tmp );
+						}
+					} //empty cell
+				} // col
+			} // row - creating lists of possible values
+
+			// go through single values queue and place any numbers in there
+			// while queue is not empty
+			// dequeue array
+			// set location to value x - index 0, y - 1, value - 2
+			//possibleValues[x,y] to null
+			// go through column x and remove value from any possible values
+			// if possible values count is 1 add to queue, if zero set to null
+			// go through row y and remove value from any possible values
+			// if possible values count is 1 add to queue, if zero set to null
+			// go through this cell and remove value from possible values
+			// is possible values count is 1 add to queue, if zero set to null
+		} // FindPossibleValues 
+	} // end class Candidate
 }
