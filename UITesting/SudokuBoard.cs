@@ -69,12 +69,15 @@ namespace SudokuSolver
 			int currentRow;
 			long lastTime = 0;
 
+			_sw.Start();
+
+			// preprocess the board
+			_Board.FindPossibleValues();
+
 			// create a candidate
 			// create the queue to hold the solution candidates and add the board to it
 			Queue<Candidate> candidateQueue = new Queue<Candidate>();
 			candidateQueue.Enqueue( _Board );
-
-			_sw.Start();
 
 			// SOLUTION LOOP
 			while( !candidateQueue.Empty() )

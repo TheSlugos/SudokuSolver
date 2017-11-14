@@ -35,9 +35,6 @@ namespace SudokuSolver
             for (int y = 0; y < Settings.BOARD_SIZE; y++)
                 for (int x = 0; x < Settings.BOARD_SIZE; x++)
                     _Board[x, y] = board[x, y];
-
-			// pre process
-			FindPossibleValues();
         }
 
         // copy constructor
@@ -232,7 +229,7 @@ namespace SudokuSolver
 		/// <summary>
 		/// Go through board and determine possible values for each cell
 		/// </summary>
-		private void FindPossibleValues()
+		public void FindPossibleValues()
 		{
 			// Queue to store single possible values
 			Queue < int[] > singleValues = new Queue<int[]>();
@@ -308,16 +305,101 @@ namespace SudokuSolver
 			} // row - creating lists of possible values
 
 			// go through single values queue and place any numbers in there
-			// while queue is not empty
-			// dequeue array
-			// set location to value x - index 0, y - 1, value - 2
-			//possibleValues[x,y] to null
-			// go through column x and remove value from any possible values
-			// if possible values count is 1 add to queue, if zero set to null
-			// go through row y and remove value from any possible values
-			// if possible values count is 1 add to queue, if zero set to null
-			// go through this cell and remove value from possible values
-			// is possible values count is 1 add to queue, if zero set to null
+			while( !singleValues.Empty() )
+			{
+				// dequeue array
+				int[] data = singleValues.Dequeue();
+				
+				int col = data[ 0 ];
+				int row = data[ 1 ];
+				int value = data[ 2 ];
+
+				// set location to value x - index 0, y - 1, value - 2
+				_Board[ col, row ] = value;
+				// possibleValues[x,y] to null
+				possibleValues[ col, row ].Remove( value );
+				possibleValues[ col, row ] = null;
+
+				// go through column x and remove value from any possible values
+				for (int y = 0; y < Settings.BOARD_SIZE; y++)
+				{
+					if( possibleValues[ col, y ] != null && possibleValues[ col, y ].Contains( value ) )
+					{
+						possibleValues[ col, y ].Remove( value );
+
+						// if possible values count is 1 add to queue, if zero set to null
+						if( possibleValues[ col, y ].Count == 1 )
+						{
+							int[] tmp = new int[ 3 ];
+							tmp[ 0 ] = col;
+							tmp[ 1 ] = y;
+							tmp[ 2 ] = possibleValues[ col, y ][ 0 ];
+							singleValues.Enqueue( tmp );
+						}
+						else if( possibleValues[ col, y ].Count == 0 )
+						{
+							possibleValues[ col, y ] = null;
+						}
+					}
+				}
+				
+				// go through row y and remove value from any possible values
+				for (int x = 0; x < Settings.BOARD_SIZE; x++ )
+				{
+					if( possibleValues[ x, row ] != null && possibleValues[ x, row ].Contains( value ) )
+					{
+						possibleValues[ x, row ].Remove( value );
+
+						// if possible values count is 1 add to queue, if zero set to null
+						if( possibleValues[ x, row ].Count == 1 )
+						{
+							int[] tmp = new int[ 3 ];
+							tmp[ 0 ] = x;
+							tmp[ 1 ] = row;
+							tmp[ 2 ] = possibleValues[ x, row ][ 0 ];
+							singleValues.Enqueue( tmp );
+						}
+						else if( possibleValues[ x, row ].Count == 0 )
+						{
+							possibleValues[ x, row ] = null;
+						}
+					}
+				}
+
+				// go through this cell and remove value from possible values
+				// is possible values count is 1 add to queue, if zero set to null
+				// go through this square
+				int squareX = col / 3;
+				int squareY = row / 3;
+
+				for( int y = 0; y < 3; y++ )
+				{
+					for( int x = 0; x < 3; x++ )
+					{
+						int indexX = x + squareX * 3;
+						int indexY = y + squareY * 3;
+
+						if( possibleValues[ indexX, indexY ] != null && possibleValues[ indexX, indexY ].Contains( value ) )
+						{
+							possibleValues[ indexX, indexY ].Remove( value );
+
+							// if possible values count is 1 add to queue, if zero set to null
+							if( possibleValues[ indexX, indexY ].Count == 1 )
+							{
+								int[] tmp = new int[ 3 ];
+								tmp[ 0 ] = indexX;
+								tmp[ 1 ] = indexY;
+								tmp[ 2 ] = possibleValues[ indexX, indexY ][ 0 ];
+								singleValues.Enqueue( tmp );
+							}
+							else if( possibleValues[ indexX, indexY ].Count == 0 )
+							{
+								possibleValues[ indexX, indexY ] = null;
+							}
+						}
+					}
+				}
+			}
 		} // FindPossibleValues 
 	} // end class Candidate
 }
