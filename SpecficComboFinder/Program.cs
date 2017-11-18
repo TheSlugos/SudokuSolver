@@ -17,6 +17,8 @@ namespace SpecficComboFinder
 
 	public class SpecificComboFinderClass
 	{
+		List<int[]> combinations;
+
 		public void test()
 		{
 			List<int> lista = new List<int>();
@@ -40,6 +42,8 @@ namespace SpecficComboFinder
 
 			int[] combo = new int[ allValues.Count ];
 
+			combinations = new List<int[]>();
+
 			FindSpecificCombo( allValues, 0, combo );
 		}
 
@@ -52,6 +56,9 @@ namespace SpecficComboFinder
 					Console.Write( combination[ x ] );
 				}
 				Console.WriteLine();
+
+				int[] tmp = (int[])combination.Clone();
+				combinations.Add( tmp );
 			}
 			else
 			{

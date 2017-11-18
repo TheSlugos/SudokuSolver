@@ -63,7 +63,12 @@ namespace SudokuSolver
 			_Solution = default( Candidate );
 		}
 
-		public bool Solve(Form1 theForm)
+		public bool TargettedSolve( Form1 theForm, bool doPre )
+		{
+			return false;
+		}
+
+		public bool Solve(Form1 theForm, bool doPre)
 		{
 			bool result = false;
 			int currentRow;
@@ -72,18 +77,23 @@ namespace SudokuSolver
 			_sw.Start();
 
 			// preprocess the board
-			_Board.FindPossibleValues();
-
+			if( doPre )
+			{
+				//MessageBox.Show( "Pre Stuff" );
+				_Board.FindPossibleValues();
+			}
 			// create a candidate
 			// create the queue to hold the solution candidates and add the board to it
 			Queue<Candidate> candidateQueue = new Queue<Candidate>();
 			candidateQueue.Enqueue( _Board );
+			currentRow = 0;
 
 			// SOLUTION LOOP
 			while( !candidateQueue.Empty() )
 			{
 				// get latest possible solution off the queue
 				Candidate baseSolution = candidateQueue.Dequeue();
+
 				//if( baseSolution.CurrentRow != currentRow )
 				//{
 				//	if( theForm.InvokeRequired )
@@ -93,19 +103,25 @@ namespace SudokuSolver
 				//	}
 				//}
 				long thisTime = _sw.ElapsedMilliseconds;
-				if( thisTime - lastTime > 100 )
+				if( thisTime - lastTime > 100 || currentRow != baseSolution.CurrentRow)
 				{
 					lastTime = thisTime;
-					
+					currentRow = baseSolution.CurrentRow;
+
 					if( theForm.InvokeRequired )
 					{
-						currentRow = baseSolution.CurrentRow;
-						theForm.Invoke( theForm.rowLabelDelegate, new object[] { currentRow, Valid, Attempts, lastTime } );
+						theForm.Invoke( theForm.rowLabelDelegate, new object[] { baseSolution.CurrentRow, Valid, Attempts, lastTime } );
 					}
 				}
+
 				// crude drop out
 				if( baseSolution.CurrentRow == Settings.BOARD_SIZE )
 				{
+					if( theForm.InvokeRequired )
+					{
+						theForm.Invoke( theForm.rowLabelDelegate, new object[] { currentRow, Valid, Attempts, lastTime } );
+					}
+
 					_Solution = baseSolution;
 					result = true;
 					break;

@@ -317,8 +317,11 @@ namespace SudokuSolver
 				// set location to value x - index 0, y - 1, value - 2
 				_Board[ col, row ] = value;
 				// possibleValues[x,y] to null
-				possibleValues[ col, row ].Remove( value );
-				possibleValues[ col, row ] = null;
+				if( possibleValues[ col, row ] != null )
+				{
+					possibleValues[ col, row ].Remove( value );
+					possibleValues[ col, row ] = null;
+				}
 
 				// go through column x and remove value from any possible values
 				for (int y = 0; y < Settings.BOARD_SIZE; y++)
