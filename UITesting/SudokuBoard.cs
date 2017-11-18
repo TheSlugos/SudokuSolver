@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Windows.Forms;
 using UITesting;
+using System.Collections.Generic;
 
 namespace SudokuSolver
 {
@@ -65,7 +66,107 @@ namespace SudokuSolver
 
 		public bool TargettedSolve( Form1 theForm, bool doPre )
 		{
-			return false;
+			bool result = false;
+			int currentRow;
+			long lastTime = 0;
+
+			_sw.Start();
+
+			// preprocess the board
+			if( doPre )
+			{
+				//MessageBox.Show( "Pre Stuff" );
+				_Board.FindPossibleValues();
+				Trace.Write( _Board.ToString() );
+			}
+			// create a candidate
+			// create the queue to hold the solution candidates and add the board to it
+			Queue<Candidate> candidateQueue = new Queue<Candidate>();
+			candidateQueue.Enqueue( _Board );
+			currentRow = 0;
+
+			// SOLUTION LOOP
+			while( !candidateQueue.Empty() )
+			{
+				// get latest possible solution off the queue
+				Candidate baseSolution = candidateQueue.Dequeue();
+
+				//if( baseSolution.CurrentRow != currentRow )
+				//{
+				//	if( theForm.InvokeRequired )
+				//	{
+				//		currentRow = baseSolution.CurrentRow;
+				//		theForm.Invoke( theForm.rowLabelDelegate, new object[] { currentRow, Valid, Attempts, _sw.ElapsedMilliseconds } );
+				//	}
+				//}
+				long thisTime = _sw.ElapsedMilliseconds;
+				if( thisTime - lastTime > 100 || currentRow != baseSolution.CurrentRow )
+				{
+					lastTime = thisTime;
+					currentRow = baseSolution.CurrentRow;
+
+					if( theForm.InvokeRequired )
+					{
+						theForm.Invoke( theForm.rowLabelDelegate, new object[] { baseSolution.CurrentRow, Valid, Attempts, lastTime } );
+					}
+				}
+
+				// crude drop out
+				if( baseSolution.CurrentRow == Settings.BOARD_SIZE )
+				{
+					if( theForm.InvokeRequired )
+					{
+						theForm.Invoke( theForm.rowLabelDelegate, new object[] { currentRow, Valid, Attempts, lastTime } );
+					}
+
+					_Solution = baseSolution;
+					result = true;
+					break;
+				}
+
+				// get missing numbers from the current row of base
+				List<int[]> missing = baseSolution.GetTargettedMissingNumbers();
+
+				if( missing.Count > 0 )
+				{
+					// get list of all possible combinations of missing values for this row
+					ReadOnlyCollection<int[]> list = CombinationFinder.FindTargettedCombinations( missing );
+
+					//Console.WriteLine( "Total combinations of missing numbers: {0}", list.Count.ToString() );
+
+					// create a new candidate for each combination of missing values
+					// fill the current row
+					// if solution is valid add to the queue
+					foreach( int[] values in list )
+					{
+						_SolutionCombinationsAttempted++;
+
+						// create a new possible solution from the base
+						Candidate current = new Candidate( baseSolution );
+
+						current.FillRow( values );
+
+						//Console.WriteLine( "Solution {0}", count );
+						//Console.WriteLine( current );
+
+						if( current.Validate() )
+						{
+							candidateQueue.Enqueue( current );
+							_ValidSolutionsOnQueue++;
+						}
+						//Console.WriteLine( current );
+					}
+				}
+				else
+				{
+					baseSolution.NextRow();
+					candidateQueue.Enqueue( baseSolution );
+				}
+			}
+
+			_sw.Stop();
+
+			return result;
 		}
 
 		public bool Solve(Form1 theForm, bool doPre)
@@ -81,6 +182,7 @@ namespace SudokuSolver
 			{
 				//MessageBox.Show( "Pre Stuff" );
 				_Board.FindPossibleValues();
+				Trace.Write( _Board.ToString() );
 			}
 			// create a candidate
 			// create the queue to hold the solution candidates and add the board to it

@@ -101,6 +101,54 @@ namespace SudokuSolver
 			return testValues.ToArray();
 		}
 
+		public List<int[]> GetTargettedMissingNumbers()
+		{
+			List<int[]> missingNumbers = new List<int[]>();
+
+			// go through current row
+			for ( int n = 0; n < Settings.BOARD_SIZE; n++)
+			{
+				if( _Board[ n, CurrentRow ] == 0 )
+				{
+					List<int> values = new List<int>();
+					for( int i = 0; i < Settings.BOARD_SIZE; i++ )
+					{
+						values.Add( i + 1 );
+					}
+
+					// go through this row and remove found values
+					for ( int col = 0; col < Settings.BOARD_SIZE; col++)
+					{
+						values.Remove( _Board[ col, CurrentRow ] );
+					}
+
+					// go through this column and remove found values
+					for( int row = 0; row < Settings.BOARD_SIZE; row++ )
+					{
+						values.Remove( _Board[ n, row ] );
+					}
+
+					// find cell
+					int cellX = n / 3;
+					int cellY = CurrentRow / 3;
+
+					// go through cells and remove found numbers
+					for ( int j = 0; j < 3; j++)
+					{
+						for ( int i = 0; i < 3; i++)
+						{
+							values.Remove( _Board[ cellX * 3 + i, cellY * 3 + j ] );
+						}
+					}
+
+					// add found numbers for this cell to the list
+					missingNumbers.Add( values.ToArray() );
+				} // end if
+			} // end for
+
+			return missingNumbers;
+		}
+
 		public void NextRow()
 		{
 			_CurrentRow++;

@@ -57,6 +57,8 @@
 			this.menuFileExit = new System.Windows.Forms.ToolStripMenuItem();
 			this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
 			this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+			this.rdoBrute = new System.Windows.Forms.RadioButton();
+			this.rdoTarget = new System.Windows.Forms.RadioButton();
 			this.menuStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -303,26 +305,26 @@
 			// menuFileOpen
 			// 
 			this.menuFileOpen.Name = "menuFileOpen";
-			this.menuFileOpen.Size = new System.Drawing.Size(210, 30);
+			this.menuFileOpen.Size = new System.Drawing.Size(152, 30);
 			this.menuFileOpen.Text = "Open...";
 			this.menuFileOpen.Click += new System.EventHandler(this.menuFileOpen_Click);
 			// 
 			// mnuFileSave
 			// 
 			this.mnuFileSave.Name = "mnuFileSave";
-			this.mnuFileSave.Size = new System.Drawing.Size(210, 30);
+			this.mnuFileSave.Size = new System.Drawing.Size(152, 30);
 			this.mnuFileSave.Text = "Save...";
 			this.mnuFileSave.Click += new System.EventHandler(this.mnuFileSave_Click);
 			// 
 			// toolStripMenuItem1
 			// 
 			this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-			this.toolStripMenuItem1.Size = new System.Drawing.Size(207, 6);
+			this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
 			// 
 			// menuFileExit
 			// 
 			this.menuFileExit.Name = "menuFileExit";
-			this.menuFileExit.Size = new System.Drawing.Size(210, 30);
+			this.menuFileExit.Size = new System.Drawing.Size(152, 30);
 			this.menuFileExit.Text = "E&xit";
 			this.menuFileExit.Click += new System.EventHandler(this.menuFileExit_Click);
 			// 
@@ -330,11 +332,35 @@
 			// 
 			this.openFileDialog1.FileName = "openFileDialog";
 			// 
+			// rdoBrute
+			// 
+			this.rdoBrute.AutoSize = true;
+			this.rdoBrute.Checked = true;
+			this.rdoBrute.Location = new System.Drawing.Point(358, 414);
+			this.rdoBrute.Name = "rdoBrute";
+			this.rdoBrute.Size = new System.Drawing.Size(118, 24);
+			this.rdoBrute.TabIndex = 103;
+			this.rdoBrute.TabStop = true;
+			this.rdoBrute.Text = "Brute Force";
+			this.rdoBrute.UseVisualStyleBackColor = true;
+			// 
+			// rdoTarget
+			// 
+			this.rdoTarget.AutoSize = true;
+			this.rdoTarget.Location = new System.Drawing.Point(358, 444);
+			this.rdoTarget.Name = "rdoTarget";
+			this.rdoTarget.Size = new System.Drawing.Size(103, 24);
+			this.rdoTarget.TabIndex = 104;
+			this.rdoTarget.Text = "Targetted";
+			this.rdoTarget.UseVisualStyleBackColor = true;
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(501, 478);
+			this.Controls.Add(this.rdoTarget);
+			this.Controls.Add(this.rdoBrute);
 			this.Controls.Add(this.chkSingle);
 			this.Controls.Add(this.labelRow);
 			this.Controls.Add(this.label85);
@@ -405,6 +431,8 @@
 		private System.Windows.Forms.ToolStripMenuItem menuFileExit;
 		private System.Windows.Forms.OpenFileDialog openFileDialog1;
 		private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+		private System.Windows.Forms.RadioButton rdoBrute;
+		private System.Windows.Forms.RadioButton rdoTarget;
 	}
 }
 

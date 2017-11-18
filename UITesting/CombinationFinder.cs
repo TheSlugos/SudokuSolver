@@ -70,5 +70,58 @@ namespace SudokuSolver
 
 			return _myList.AsReadOnly();
 		}
+
+		public static ReadOnlyCollection<int[]> FindTargettedCombinations(List<int[]> numbers)
+		{
+			// create new list for this lot of combinations
+			_myList = new List<int[]>();
+
+			int[] combination = new int[ numbers.Count ];
+
+			FindSpecificCombo( numbers, 0, combination );
+
+			return _myList.AsReadOnly();
+		}
+
+		private static void FindSpecificCombo( List<int[]> numbers, int index, int[] combination )
+		{
+			if( index == numbers.Count )
+			{
+				for( int x = 0; x < combination.Length; x++ )
+				{
+					Console.Write( combination[ x ] );
+				}
+				Console.WriteLine();
+
+				int[] tmp = ( int[] )combination.Clone();
+				_myList.Add( tmp );
+			}
+			else
+			{
+				for( int n = 0; n < numbers[ index ].Length; n++ )
+				{
+					// make sure current element of array is cleared
+					combination[ index ] = 0;
+
+					bool duplicate = false;
+					// check for duplicate value
+					// check up to this value and if duplicate found in array skip this value
+					for( int j = 0; j <= index; j++ )
+					{
+						if( combination[ j ] == numbers[ index ][ n ] )
+						{
+							duplicate = true;
+							break;
+						}
+					}
+
+					if( !duplicate )
+					{
+						combination[ index ] = numbers[ index ][ n ];
+						FindSpecificCombo( numbers, index + 1, combination );
+					}
+				}
+			}
+		}
 	}
 }

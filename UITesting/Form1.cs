@@ -217,6 +217,8 @@ namespace UITesting
 				{
 					selectedLabel.Text = string.Empty;
 				}
+
+				//MessageBox.Show( e.KeyChar.ToString() );
 			}
 		}
 
@@ -237,7 +239,6 @@ namespace UITesting
 			bool labelValue = false;
 			// go through all labels and if there are no label values
 			// then cannot attempt solution
-
 			// got some value so attempt to solve
 			int[,] board = new int[ Settings.BOARD_SIZE, Settings.BOARD_SIZE ];
 				
@@ -265,7 +266,12 @@ namespace UITesting
 				// set buttons to disabled
 				button11.Enabled = false;
 				this.Cursor = Cursors.WaitCursor;
-				bool result = await Task.Run( () => sb.Solve( this, chkSingle.Checked ) );
+
+				bool result = false;
+				if( rdoBrute.Checked )
+					result = await Task.Run( () => sb.Solve( this, chkSingle.Checked ) );
+				else
+					result = await Task.Run( () => sb.TargettedSolve( this, chkSingle.Checked ) );
 
 				button11.Enabled = true;
 				this.Cursor = Cursors.Default;
@@ -440,6 +446,77 @@ namespace UITesting
 			}
 
 			return result;
+		}
+
+		protected override bool ProcessCmdKey( ref Message msg, Keys keyData )
+		{
+			int currentX, currentY, nextX, nextY;
+			bool handled = false;
+			currentX = currentY = nextX = nextY = 0;
+
+			if ( selectedLabel != default(Label))
+			{
+				// find selected label
+				for( int j = 0; j < Settings.BOARD_SIZE; j++ )
+				{
+					for( int i = 0; i < Settings.BOARD_SIZE; i++ )
+					{
+						if( cellLabels[ i, j ] == selectedLabel )
+						{
+							currentX = i; currentY = j;
+							break;
+						}
+					}
+				}
+
+				nextX = currentX;
+				nextY = currentY;
+
+				switch (keyData)
+				{
+					case Keys.Left:
+						nextX--;
+						if( nextX < 0 )
+							nextX = Settings.BOARD_SIZE - 1;
+						handled = true;
+						break;
+
+					case Keys.Right:
+						nextX++;
+						if( nextX == Settings.BOARD_SIZE )
+							nextX = 0;
+						handled = true;
+						break;
+
+					case Keys.Up:
+						nextY--;
+						if( nextY < 0 )
+							nextY = Settings.BOARD_SIZE - 1;
+						handled = true;
+						break;
+
+					case Keys.Down:
+						nextY++;
+						if( nextY == Settings.BOARD_SIZE )
+							nextY = 0;
+						handled = true;
+						break;
+				}
+
+				if ( (nextX >= 0 && nextX < Settings.BOARD_SIZE) &&
+					( nextY >= 0 && nextY < Settings.BOARD_SIZE))
+				{
+					cellLabels[ currentX, currentY ].BackColor = SystemColors.Control;
+					cellLabels[ nextX, nextY ].BackColor = Color.Yellow;
+					selectedLabel = cellLabels[ nextX, nextY ];
+				}
+				
+			}
+
+			if( !handled )
+				return base.ProcessCmdKey( ref msg, keyData );
+			else
+				return handled;
 		}
 	}
 }
